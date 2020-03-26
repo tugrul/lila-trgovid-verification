@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <p>Gerçek kullanıcı doğrulaması için lütfen bilgilerinizi aşağıdaki forma giriniz.</p>
+
+    <form method="post" action="">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="person-id">TC Kimlik No</label>
+                <input type="text" class="form-control" id="gov-id" name="id" placeholder="11111111110" maxlength="11">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="person-name">İsim</label>
+                <input type="text" class="form-control" id="person-name" name="name" placeholder="Ali">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="person-surname">Soyisim</label>
+                <input type="text" class="form-control" id="person-surname" name="surname" placeholder="Veli">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="person-birth-year">Doğum Yılı</label>
+                <select class="form-control" id="person-birth-year" name="year">
+                    {% for i in 0..100 %}
+                        <option value="{{ year - i }}">{{ year - i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Doğrula</button>
+    </form>
+
+{% endblock %}

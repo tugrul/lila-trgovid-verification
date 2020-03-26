@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="/players/waiting">Waiting</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/players/verified">Verified</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/players/banned">Banned</a>
+        </li>
+    </ul>
+
+    {% if players|length > 0 %}
+
+    <form method="post" action="/players/ban">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.userId }}</td>
+                <td>{{ player.userName }}</td>
+                <td><button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure to ban {{ player.userId }}?')"
+                            type="submit" name="user" value="{{ player.userId }}">Ban</button></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </form>
+
+    {% else %}
+        <p>There is no waiting user.</p>
+    {% endif %}
+
+{% endblock %}

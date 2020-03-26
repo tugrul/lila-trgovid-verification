@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="/players/waiting">Waiting</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/players/verified">Verified</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="/players/banned">Banned</a>
+        </li>
+    </ul>
+
+    {% if players|length > 0 %}
+
+    <form method="post" action="/players/unban">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for player in players %}
+                <tr>
+                    <td>{{ player.userId }}</td>
+                    <td>{{ player.userName }}</td>
+                    <td><button class="btn btn-warning btn-sm" onclick="return confirm('Are you sure to remove ban {{ player.userId }}?')"
+                                type="submit" name="user" value="{{ player.userId }}">Unban</button></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </form>
+
+    {% else %}
+        <p>There is no banned user.</p>
+    {% endif %}
+
+{% endblock %}
